@@ -23,6 +23,7 @@ export const Products = () => {
                 ))}
             </ul>
         </div>
+        
 
     )
 }

@@ -17,9 +17,9 @@ export const Products = () => {
     return(
         <div className="container">
             Products:
-            <ul>
+            <ul className="list-group list-group-flush">
                 {products.map(product => (
-                    <li key={product.ProduktID}>{product.Produkttitel}</li>
+                    <li className="list-group-item" key={product.ProduktID}>{product.Produkttitel}</li>
                 ))}
             </ul>
         </div>

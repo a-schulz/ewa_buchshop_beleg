@@ -9,7 +9,7 @@ or die("Keine Verbindung möglich: " . mysql_error());
 
 // Set up the HTTP response headers
 header("Content-Type: application/json");
-header("Access-Control-Allow-Origin: ");
+header("Access-Control-Allow-Origin: *");
 
 // Read the HTTP method and request data
 $httpMethod = $_SERVER["REQUEST_METHOD"];

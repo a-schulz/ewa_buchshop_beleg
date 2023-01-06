@@ -19,9 +19,14 @@ export const Products = () => {
             Products:
             <ul className="list-group list-group-flush">
                 {products.map(product => (
-                    <li className="list-group-item" key={product.ProduktID}>{product.Produkttitel}</li>
+                    <li className="list-group-item" key={product.ProduktID}>
+                        <button type="button" className="btn btn-text" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                            {product.Produkttitel}
+                        </button>
+                        </li>
                 ))}
             </ul>
+
         </div>
         
 

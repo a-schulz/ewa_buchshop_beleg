@@ -8,32 +8,46 @@ export const Products = () => {
 
 
     fetch('https://ivm108.informatik.htw-dresden.de/ewa/g14/php/index.php')
-      .then(response => response.json())
-      .then((usefulData) => {
-        setProducts(usefulData);
-      })
-      .catch((e) => {
-        console.error(`An error occurred: ${e}`)
-      });
+        .then(response => response.json())
+        .then((usefulData) => {
+            setProducts(usefulData);
+        })
+        .catch((e) => {
+            console.error(`An error occurred: ${e}`)
+        });
 
-    return(
+    return (
         <div className="container">
             Products:
-            <ul className="list-group list-group-flush">
+            <table className={"table table-striped"}>
+                <thead>
+                <tr>
+                    <th scope="col">Produkttitel</th>
+                    <th scope="col">Preis</th>
+                    <th scope="col"></th>
+                </tr>
+                </thead>
+                <tbody>
                 {products.map(product => (
-                    <li className="list-group-item" key={product.ProduktID}>
-                        <button type="button" className="btn btn-text" onClick={(e) => {
-                            navigate('/productDetails/' + product.ProduktID);
-                        }
-                        }>
-                            {product.Produkttitel}
-                        </button>
-                        </li>
+                    <tr key={product.ProduktID}>
+                        <td>
+                            <button type="button" className="btn btn-text" onClick={(e) => {
+                                navigate('/productDetails/' + product.ProduktID);
+                            }
+                            }>
+                                {product.Produkttitel}
+                            </button>
+                        </td>
+                        <td> {product.PreisBrutto} €</td>
+                        <td>
+                            <button type="button" className="btn btn-primary">Add to cart</button>
+                        </td>
+                    </tr>
                 ))}
-            </ul>
-
+                </tbody>
+            </table>
         </div>
-        
+
 
     )
 }

@@ -20,6 +20,8 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 )
 
 /*
+Warenkorb soll aus der geasmt übersicht und aus der detailseite aktualisiert werden können
+
 Zustand:
     Warenkorb anzahl
  */

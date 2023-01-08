@@ -1,6 +1,8 @@
 import {useState} from "react";
+import {useNavigate} from "react-router-dom";
 
 export const Products = () => {
+    const navigate = useNavigate();
 
     var [products, setProducts] = useState([]);
 
@@ -20,7 +22,10 @@ export const Products = () => {
             <ul className="list-group list-group-flush">
                 {products.map(product => (
                     <li className="list-group-item" key={product.ProduktID}>
-                        <button type="button" className="btn btn-text" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                        <button type="button" className="btn btn-text" onClick={(e) => {
+                            navigate('/productDetails/' + product.ProduktID);
+                        }
+                        }>
                             {product.Produkttitel}
                         </button>
                         </li>

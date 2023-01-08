@@ -1,25 +1,43 @@
-
+import {useEffect, useState} from "react";
+import {useParams} from "react-router-dom";
 
 export const ProductDetails = () => {
+    const productId = useParams().productId;
+    const [product, setProduct] = useState([]);
 
-    return (
-        <div className="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1"
-             aria-labelledby="staticBackdropLabel" aria-hidden="true">
-            <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-                <div className="modal-content">
-                    <div className="modal-header">
-                        <h1 className="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
-                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    useEffect(() => {
+        fetch('https://ivm108.informatik.htw-dresden.de/ewa/g14/php/index.php?id=' + productId)
+            .then(response => response.json())
+            .then((usefulData) => {
+                setProduct(usefulData[0]);
+            })
+            .catch((e) => {
+                console.error(`An error occurred: ${e}`)
+            });
+    }, [productId]);
+
+    return (<div className="container">
+        <div className="row">
+            <div className="col-6">
+                <div className="card">
+                    <div className="card-body">
+                        <img src={product.LinkGrafikdatei} className="img-fluid" alt="Responsive image"/>
                     </div>
-                    <div className="modal-body">
-                        ...
-                    </div>
-                    <div className="modal-footer">
-                        <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" className="btn btn-primary">Understood</button>
+                </div>
+            </div>
+            <div className="col-6">
+                <div className="card">
+                    <div className="card-body">
+                        <h1>{product.Produkttitel}</h1>
+                        {product.Autorname ? <span>{product.Autorname}</span> : <p>Kein Autor</p>}
+                        {product.Verlagname ? <span>{product.Verlagname}</span> : <p>Kein Verlag</p>}
+                        <p>{product.Kurzinhalt}</p>
+                        <p>Nur noch {product.Lagerbestand} vorhaden!</p>
+                        <p>{product.PreisBrutto} €</p>
+                        <button type="button" className="btn btn-primary">Add to cart</button>
                     </div>
                 </div>
             </div>
         </div>
-    )
+    </div>)
 }

@@ -23,6 +23,7 @@ export const Products = () => {
 
     return (
         <div className="container">
+            <h1>Buchshop</h1>
             <table className={"table table-striped"}>
                 <thead>
                 <tr>

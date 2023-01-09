@@ -23,7 +23,7 @@ export const NavBar = () => {
         <nav className="navbar sticky-top navbar-light bg-light"
              style={{border: "1px solid #b1b1b1", borderRadius: "5px", padding: "5px"}}>
             <div className="container-fluid">
-                <a className="navbar-brand" href="/ewa/g14">Katalog</a>
+                <a className="navbar-brand" href="/ewa/g14">Start</a>
                 {/*<span>{time}</span>*/}
                 <Search/>
                 <button id="offcanvascontrol" className="btn btn btn-outline-secondary" type="button"

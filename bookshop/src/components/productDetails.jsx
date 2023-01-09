@@ -32,8 +32,8 @@ export const ProductDetails = () => {
                 <div className="card">
                     <div className="card-body">
                         <h1>{product.Produkttitel}</h1>
-                        {product.Autorname ? <span>{product.Autorname}</span> : <p>Kein Autor</p>}
-                        {product.Verlagname ? <span>{product.Verlagname}</span> : <p>Kein Verlag</p>}
+                        {product.Autorname ? <p>{product.Autorname}</p> : <p>Kein Autor</p>}
+                        {product.Verlagsname ? <p>{product.Verlagsname}</p> : <p>Kein Verlag</p>}
                         <p>{product.Kurzinhalt}</p>
                         <p>Nur noch {product.Lagerbestand} vorhaden!</p>
                         <p>{product.PreisBrutto} €</p>

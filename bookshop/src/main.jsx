@@ -6,6 +6,7 @@ import {NavBar} from "./components/navbar.jsx";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import {Home} from "./sites/home.jsx";
 import {ProductDetails} from "./components/productDetails.jsx";
+import {Details} from "./sites/details.jsx";
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -13,7 +14,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           <NavBar></NavBar>
           <Routes>
               <Route path="/" element={<Home/>}/>
-              <Route path="/productDetails/:productId" element={<ProductDetails/>}/>
+              <Route path="/productDetails/:productId" element={<Details/>}/>
           </Routes>
       </BrowserRouter>
   </React.StrictMode>

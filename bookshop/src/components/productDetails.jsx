@@ -1,9 +1,12 @@
 import {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
+import {useCartStore} from "../store/cartStore.js";
 
 export const ProductDetails = () => {
     const productId = useParams().productId;
     const [product, setProduct] = useState([]);
+    const [qty, setQty] = useState(1);
+    const updateBooks = useCartStore(state => state.updateBooks);
 
     useEffect(() => {
         fetch('https://ivm108.informatik.htw-dresden.de/ewa/g14/php/index.php?id=' + productId)
@@ -34,7 +37,14 @@ export const ProductDetails = () => {
                         <p>{product.Kurzinhalt}</p>
                         <p>Nur noch {product.Lagerbestand} vorhaden!</p>
                         <p>{product.PreisBrutto} €</p>
-                        <button type="button" className="btn btn-primary">Add to cart</button>
+                        <input className={"form-control"}
+                            type={"number"}
+                            value={qty}
+                        onChange={(e) => setQty(Number.parseInt(e.target.value))}
+                        />
+                        <button type="button" className="btn btn-primary"
+                                onClick={() => {updateBooks({ProduktID: product.ProduktID, amount: qty})}}
+                        >Add to cart</button>
                     </div>
                 </div>
             </div>

@@ -1,6 +1,6 @@
 import {useCartStore} from "../store/cartStore.js";
 import {useEffectOnce} from "../helper/useEffectOnce.js";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 
 export const Cart = () => {
@@ -8,6 +8,8 @@ export const Cart = () => {
     const [products, setProducts] = useState([]);
     const books = useCartStore(state => state.books);
     const updateBooks = useCartStore(state => state.updateBooks);
+
+    useEffect(()=>{},books);
 
     useEffectOnce(() => {
         fetch('https://ivm108.informatik.htw-dresden.de/ewa/g14/php/index.php')
@@ -51,8 +53,12 @@ export const Cart = () => {
                                     <td>{product.PreisBrutto}</td>
                                     <td>{entry[1] * product.PreisBrutto}</td>
                                     <td>
-                                        <button className={"btn btn-primary"} style={{marginLeft: "10px"}}>+</button>
-                                        <button className={"btn btn-danger"} style={{marginLeft: "10px"}}>-</button>
+                                        <button className={"btn btn-primary"} style={{marginLeft: "10px"}}
+                                        onClick={() => {updateBooks({ProduktID: entry[0], amount: 1})}}
+                                        >+</button>
+                                        <button className={"btn btn-danger"} style={{marginLeft: "10px"}}
+                                                onClick={() => {updateBooks({ProduktID: entry[0], amount: -1})}}
+                                        >-</button>
                                     </td>
                                 </tr>)
                             })}

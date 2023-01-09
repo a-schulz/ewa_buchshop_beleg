@@ -18,6 +18,6 @@ echo "<br>Bitte notieren Sie sich die Checkout-SessionID für Rückfragen:" .  $
 
 ?>
 <hr>
-<a href="https://iws107.informatik.htw-dresden.de/ewa/demos/__STRIPE_DEMOS_2022/index.html">Zurück zum Shop</a>
+<a href="https://ivm108.informatik.htw-dresden.de/ewa/g14">Zurück zum Shop</a>
 
 </html>

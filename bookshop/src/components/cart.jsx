@@ -26,10 +26,10 @@ export const Cart = () => {
                  id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel"
                  style={{"--bs-offcanvas-width": "600px"}}>
                 <div className="offcanvas-header">
-                    <h5 className="offcanvas-title" id="offcanvasScrollingLabel">Cart</h5>
+                    <h5 className="offcanvas-title" id="offcanvasScrollingLabel">Warenkorb</h5>
                     <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
-                {Object.keys(books).length === 0 ? <div className={"container"}>Your cart is empty</div> :
+                {Object.keys(books).length === 0 ? <div className={"container"}>Ihr Warenkorb ist leer.</div> :
                     <div className={"container"}>
                         <table className={"table table-striped"}>
                             <thead>

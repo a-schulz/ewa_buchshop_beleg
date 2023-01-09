@@ -26,7 +26,7 @@ export const Products = () => {
             <table className={"table table-striped"}>
                 <thead>
                 <tr>
-                    <th scope="col">Produkttitel</th>
+                    <th scope="col">Buchtitel</th>
                     <th scope="col">Preis</th>
                     <th scope="col"></th>
                 </tr>

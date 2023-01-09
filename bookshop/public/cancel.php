@@ -14,7 +14,7 @@
 Bezahlvorgang wurde abgebrochen.
 
 <?php
-echo "<br>Bitte notieren Sie sich die Stripe-SessionID für Rückfragen:" .  $_GET['session_id'] ; 
+echo "<br>Bitte notieren Sie sich die Checkout-SessionID für Rückfragen:" .  $_GET['session_id'] ;
 
 ?>
 

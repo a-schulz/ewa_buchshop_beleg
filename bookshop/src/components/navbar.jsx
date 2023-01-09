@@ -1,8 +1,15 @@
 import {useEffect, useState} from "react";
 import {Search} from "./search";
+import {useCartStore} from "../store/cartStore.js";
 
 export const NavBar = () => {
     const [time, setTime] = useState("");
+    const books = useCartStore(state => state.books);
+    const [sumAmount, setSumAmount] = useState(0);
+
+    useEffect(() => {
+        setSumAmount(Object.values(books).reduce((a, b) => a + b, 0));
+    }, [books]);
 
     const updateTime = () => {
         setTime(new Date().toLocaleDateString("de-DE") + " " + new Date().toLocaleTimeString());
@@ -19,8 +26,11 @@ export const NavBar = () => {
                 <a className="navbar-brand" href="/ewa/g14">Katalog</a>
                 {/*<span>{time}</span>*/}
                 <Search/>
-                <button id="offcanvascontrol" className="btn btn btn-outline-secondary" type="button" data-bs-toggle="offcanvas"
+                <button id="offcanvascontrol" className="btn btn btn-outline-secondary" type="button"
+                        data-bs-toggle="offcanvas"
                         data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">🛒
+                    {
+                        sumAmount > 0 ? <span className="badge bg-danger">{sumAmount}</span> : null}
                 </button>
             </div>
         </nav>

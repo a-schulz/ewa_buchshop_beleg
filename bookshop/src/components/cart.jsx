@@ -1,3 +1,4 @@
+import {useCartStore} from "../store/cartStore.js";
 
 
 export const Cart = () =>{

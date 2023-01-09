@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import {useNavigate} from "react-router-dom";
+import {useEffectOnce} from "../helper/useEffectOnce.js";
 
 export const Search = () => {
     const navigate = useNavigate();
@@ -7,14 +8,17 @@ export const Search = () => {
 
     var [products, setProducts] = useState([]);
 
-    fetch('https://ivm108.informatik.htw-dresden.de/ewa/g14/php/index.php')
-        .then(response => response.json())
-        .then((usefulData) => {
-            setProducts(usefulData);
-        })
-        .catch((e) => {
-            console.error(`An error occurred: ${e}`)
-        });
+    useEffectOnce(()=>{
+        fetch('https://ivm108.informatik.htw-dresden.de/ewa/g14/php/index.php')
+            .then(response => response.json())
+            .then((usefulData) => {
+                setProducts(usefulData);
+            })
+            .catch((e) => {
+                console.error(`An error occurred: ${e}`)
+            });
+    })
+
 
     const onSubmit = (e) => {
         e.preventDefault();

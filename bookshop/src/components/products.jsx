@@ -1,24 +1,28 @@
 import {useState} from "react";
 import {useNavigate} from "react-router-dom";
+import {useCartStore} from "../store/cartStore.js";
+import {useEffectOnce} from "../helper/useEffectOnce.js";
 
 export const Products = () => {
     const navigate = useNavigate();
 
-    var [products, setProducts] = useState([]);
+    const [products, setProducts] = useState([]);
+    const updateBooks = useCartStore(state => state.updateBooks);
 
+    useEffectOnce(()=>{
+        fetch('https://ivm108.informatik.htw-dresden.de/ewa/g14/php/index.php')
+            .then(response => response.json())
+            .then((usefulData) => {
+                setProducts(usefulData);
+            })
+            .catch((e) => {
+                console.error(`An error occurred: ${e}`)
+            });
+    })
 
-    fetch('https://ivm108.informatik.htw-dresden.de/ewa/g14/php/index.php')
-        .then(response => response.json())
-        .then((usefulData) => {
-            setProducts(usefulData);
-        })
-        .catch((e) => {
-            console.error(`An error occurred: ${e}`)
-        });
 
     return (
         <div className="container">
-            Products:
             <table className={"table table-striped"}>
                 <thead>
                 <tr>
@@ -29,9 +33,9 @@ export const Products = () => {
                 </thead>
                 <tbody>
                 {products.map(product => (
-                    <tr key={product.ProduktID}>
+                    <tr key={product.ProduktID} productid={product.ProduktID}>
                         <td>
-                            <button type="button" className="btn btn-text" onClick={(e) => {
+                            <button type="button" className="btn btn-text" onClick={() => {
                                 navigate('/productDetails/' + product.ProduktID);
                             }
                             }>
@@ -40,7 +44,13 @@ export const Products = () => {
                         </td>
                         <td> {product.PreisBrutto} €</td>
                         <td>
-                            <button type="button" className="btn btn-primary">Add to cart</button>
+                            <button type="button"
+                                    className="btn btn-primary"
+                                    onClick={(e) => {
+                                        updateBooks({ProduktID: e.target.parentNode.parentNode.getAttribute("productid"), amount: 1})
+                                    }}>
+                                Add to cart
+                            </button>
                         </td>
                     </tr>
                 ))}

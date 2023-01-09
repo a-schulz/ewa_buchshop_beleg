@@ -50,7 +50,7 @@ export const Products = () => {
                                     onClick={(e) => {
                                         updateBooks({ProduktID: e.target.parentNode.parentNode.getAttribute("productid"), amount: 1})
                                     }}>
-                                Add to cart
+                                In den Einkaufswagen hinzufügen
                             </button>
                         </td>
                     </tr>

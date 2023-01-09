@@ -44,7 +44,7 @@ export const ProductDetails = () => {
                         />
                         <button type="button" className="btn btn-primary"
                                 onClick={() => {updateBooks({ProduktID: product.ProduktID, amount: qty})}}
-                        >Add to cart</button>
+                        >In den Einkaufswagen hinzufügen</button>
                     </div>
                 </div>
             </div>

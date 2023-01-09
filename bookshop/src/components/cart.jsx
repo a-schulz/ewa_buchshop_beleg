@@ -1,6 +1,7 @@
 import {useCartStore} from "../store/cartStore.js";
 import {useEffectOnce} from "../helper/useEffectOnce.js";
 import {useEffect, useState} from "react";
+import Checkout from "./checkout.jsx";
 
 
 export const Cart = () => {
@@ -68,6 +69,7 @@ export const Cart = () => {
                             const product = products.find((e) => e.ProduktID === entry[0]);
                             return entry[1] * product.PreisBrutto;
                         }).reduce((a, b) => a + b, 0)}€</h5>
+                        <Checkout/>
                     </div>}
             </div>
         </div>

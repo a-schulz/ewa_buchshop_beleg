@@ -1,0 +1,15 @@
+
+
+parameters:
+	ignoreErrors:
+		-
+			message: "#^Access to undefined constant Checkout\\\\ApiResource\\:\\:OBJECT_NAME\\.$#"
+			count: 1
+			path: lib/ApiResource.php
+
+		-
+			message: "#^Access to undefined constant Checkout\\\\SingletonApiResource\\:\\:OBJECT_NAME\\.$#"
+			count: 1
+			path: lib/SingletonApiResource.php
+
+

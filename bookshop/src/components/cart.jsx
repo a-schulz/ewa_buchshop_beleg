@@ -1,37 +1,68 @@
 import {useCartStore} from "../store/cartStore.js";
+import {useEffectOnce} from "../helper/useEffectOnce.js";
+import {useState} from "react";
 
 
-export const Cart = () =>{
+export const Cart = () => {
 
-    return(
-        <div className="container">
-            <div className="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" //tabIndex="-1"
-                 id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
+    const [products, setProducts] = useState([]);
+    const books = useCartStore(state => state.books);
+    const updateBooks = useCartStore(state => state.updateBooks);
+
+    useEffectOnce(() => {
+        fetch('https://ivm108.informatik.htw-dresden.de/ewa/g14/php/index.php')
+            .then(response => response.json())
+            .then((usefulData) => {
+                setProducts(usefulData);
+            })
+            .catch((e) => {
+                console.error(`An error occurred: ${e}`)
+            });
+    })
+
+    return (<div className="container">
+            <div className="offcanvas offcanvas-end offcanvas-size-xl" data-bs-scroll="true"
+                 data-bs-backdrop="false" //tabIndex="-1"
+                 id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel"
+                 style={{"--bs-offcanvas-width": "600px"}}>
                 <div className="offcanvas-header">
-                    <h5 className="offcanvas-title" id="offcanvasScrollingLabel">Solution aids</h5>
+                    <h5 className="offcanvas-title" id="offcanvasScrollingLabel">Cart</h5>
                     <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
-                <div className="offcanvas-body">
-                    <div className="accordion" id="accordionPanelsStayOpenExample">
-                        <div className="accordion-item">
-                            <h2 className="accordion-header" id="panelsStayOpen-headingOne">
-                                <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true"
-                                        aria-controls="panelsStayOpen-collapseOne">
-                                    Formula
-                                </button>
-                            </h2>
-                            <div id="panelsStayOpen-collapseOne" className="accordion-collapse collapse"
-                                 aria-labelledby="panelsStayOpen-headingOne">
-                                <div className="accordion-body">
-                                    <h5>Encryption:</h5>
-                                    <p>Use the public key for encryption and the private key for decryption.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
+                {Object.keys(books).length === 0 ? <div className={"container"}>Your cart is empty</div> :
+                    <div className={"container"}>
+                        <table className={"table table-striped"}>
+                            <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Buchtitel</th>
+                                <th scope="col">Menge</th>
+                                <th scope="col">Preis</th>
+                                <th scope="col">Gesamt</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {Object.entries(books).map((entry, index) => {
+                                const product = products.find((e) => e.ProduktID === entry[0]);
+                                return (<tr key={index}>
+                                    <td>{index + 1}</td>
+                                    <td>{product.Produkttitel}</td>
+                                    <td>{entry[1]}</td>
+                                    <td>{product.PreisBrutto}</td>
+                                    <td>{entry[1] * product.PreisBrutto}</td>
+                                    <td>
+                                        <button className={"btn btn-primary"} style={{marginLeft: "10px"}}>+</button>
+                                        <button className={"btn btn-danger"} style={{marginLeft: "10px"}}>-</button>
+                                    </td>
+                                </tr>)
+                            })}
+                            </tbody>
+                        </table>
+                        <h5>Gesamt: {Object.entries(books).map((entry) => {
+                            const product = products.find((e) => e.ProduktID === entry[0]);
+                            return entry[1] * product.PreisBrutto;
+                        }).reduce((a, b) => a + b, 0)}€</h5>
+                    </div>}
             </div>
         </div>
 

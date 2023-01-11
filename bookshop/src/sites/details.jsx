@@ -6,7 +6,6 @@ export const Details = () => {
     return (
         <div className={"container"}>
             <ProductDetails/>
-            <Cart/>
         </div>
     )
 }

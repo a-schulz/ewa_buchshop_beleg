@@ -10,8 +10,6 @@ export const Cart = () => {
     const books = useCartStore(state => state.books);
     const updateBooks = useCartStore(state => state.updateBooks);
 
-    useEffect(()=>{},books);
-
     useEffectOnce(() => {
         fetch('https://ivm108.informatik.htw-dresden.de/ewa/g14/php/index.php')
             .then(response => response.json())
@@ -21,7 +19,7 @@ export const Cart = () => {
             .catch((e) => {
                 console.error(`An error occurred: ${e}`)
             });
-    })
+    },[])
 
     return (<div className="container">
             <div className="offcanvas offcanvas-end offcanvas-size-xl" data-bs-scroll="true"

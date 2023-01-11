@@ -6,7 +6,7 @@ export const Search = () => {
     const navigate = useNavigate();
     const [searchTerm, setSearchTerm] = useState("");
 
-    var [products, setProducts] = useState([]);
+    const [products, setProducts] = useState([]);
 
     useEffectOnce(()=>{
         fetch('https://ivm108.informatik.htw-dresden.de/ewa/g14/php/index.php')
@@ -22,7 +22,7 @@ export const Search = () => {
 
     const onSubmit = (e) => {
         e.preventDefault();
-        console.log(searchTerm);
+        // console.log(searchTerm);
         let product;
         if (product = products.find(product => product.Produkttitel === searchTerm)) {
             navigate('/productDetails/' + product.ProduktID);

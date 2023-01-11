@@ -7,11 +7,13 @@ import {BrowserRouter, Route, Routes} from "react-router-dom";
 import {Home} from "./sites/home.jsx";
 import {ProductDetails} from "./components/productDetails.jsx";
 import {Details} from "./sites/details.jsx";
+import {Cart} from "./components/cart";
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
       <BrowserRouter basename={'/ewa/g14'}>
           <NavBar></NavBar>
+          <Cart/>
           <Routes>
               <Route path="/" element={<Home/>}/>
               <Route path="/productDetails/:productId" element={<Details/>}/>

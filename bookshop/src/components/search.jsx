@@ -27,8 +27,7 @@ export const Search = () => {
         if (product = products.find(product => product.Produkttitel === searchTerm)) {
             navigate('/productDetails/' + product.ProduktID);
         } else {
-            navigate('/' + searchTerm);
-            // Hier könnte man evtl noch auf eine Seite navigieren, bei der mehr Attribute durchsucht werden, ähnlich wie die Startseite nur gefiltert
+            navigate('/', {state: {searchTerm: searchTerm}});
         }
 
     }

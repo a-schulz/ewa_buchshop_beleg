@@ -1,11 +1,12 @@
 import {useState} from "react";
-import {useNavigate, useParams} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 import {useCartStore} from "../store/cartStore.js";
 import {useEffectOnce} from "../helper/useEffectOnce.js";
 
 export const Products = () => {
     const navigate = useNavigate();
-    const searchTerm = useParams().searchTerm;
+    const location = useLocation();
+    const searchTerm = location.state?.searchTerm;
 
     const [products, setProducts] = useState([]);
     const updateBooks = useCartStore(state => state.updateBooks);

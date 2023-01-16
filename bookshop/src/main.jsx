@@ -16,7 +16,6 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           <Cart/>
           <Routes>
               <Route path="/" element={<Home/>}/>
-              <Route path="/:searchTerm" element={<Home/>}/>
               <Route path="/productDetails/:productId" element={<Details/>}/>
           </Routes>
       </BrowserRouter>

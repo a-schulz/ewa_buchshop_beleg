@@ -18,7 +18,10 @@ export const NavBar = () => {
     }
 
     useEffect(() => {
-        setInterval(updateTime, 1000);
+        const time = setInterval(updateTime, 1000);
+        return () => {
+            clearInterval(time);
+        }
     }, []);
 
     return (<nav className="navbar sticky-top navbar-light bg-light"

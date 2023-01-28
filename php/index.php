@@ -3,13 +3,16 @@
 // Set up the database connection
 $username = 'g14';
 $password = 'gu67mim';
+$database = 'g14';
 
-$conn = new mysqli("localhost", "g14", $password, $username)
+$conn = new mysqli("localhost", $username, $password, $database)
 or die("Keine Verbindung möglich: " . mysql_error());
 
 // Set up the HTTP response headers
+// PHP should return JSON data
 header("Content-Type: application/json");
-header("Access-Control-Allow-Origin: ");
+// Allow any client to access this API
+header("Access-Control-Allow-Origin: *");
 
 // Read the HTTP method and request data
 $httpMethod = $_SERVER["REQUEST_METHOD"];
